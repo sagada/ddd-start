@@ -9,8 +9,17 @@ public class Order {
     private ShippingInfo shippingInfo;
     private OrderState orderState;
 
+    public Order(List<OrderLine> orderLineList, Money totalAmounts, ShippingInfo shippingInfo, OrderState orderState)
+    {
+        this.orderLineList = orderLineList;
+        this.totalAmounts = totalAmounts;
+        this.shippingInfo = shippingInfo;
+        this.orderState = orderState;
+    }
+
     public Order(List<OrderLine> orderLineList, ShippingInfo shippingInfo)
     {
+
         setShippingInfo(shippingInfo);
         setOrderLines(orderLineList);
     }
@@ -23,11 +32,18 @@ public class Order {
         this.shippingInfo = shippingInfo;
     }
 
+    public void cancel()
+    {
+        verifyNotYetShipped();
+        this.orderState = OrderState.CANCELED;
+    }
+
+    // 출고 Check 메서드
     private void verifyNotYetShipped()
     {
         if (orderState != OrderState.PAYMENT_WAITING && orderState != OrderState.PREPARING)
         {
-            throw new IllegalArgumentException("aleady shipped");
+            throw new IllegalArgumentException("Already shipped");
         }
     }
 
@@ -46,12 +62,16 @@ public class Order {
 
     private void calculateTotalAmounts()
     {
-        this.totalAmounts = new Money(orderLineList.stream().mapToInt(x -> x.getAmounts()).sum());
+        this.totalAmounts = new Money(orderLineList.stream().mapToInt(x -> x.getAmounts().getValue()).sum());
     }
 
     public void changeShipped(){}
-    public void changeShippingInfo(){}
-    public void cancel(){}
+
+    // 배송지 정보 변경
+    public void changeShippingInfo(ShippingInfo newShippingInfo){
+        verifyNotYetShipped();
+        setShippingInfo(newShippingInfo);
+    }
     public void completePayment(){}
 
 }

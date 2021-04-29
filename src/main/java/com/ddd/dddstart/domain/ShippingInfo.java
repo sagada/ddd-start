@@ -4,8 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class ShippingInfo {
-    private String receiverName;
-    private String receiverPhoneNumber;
-    private String shippingAddress;
-
+    private Receiver receiver;
+    private Address address;
 }
