@@ -1,7 +1,12 @@
-package com.ddd.dddstart.domain;
+package com.ddd.dddstart.order.domain;
 
+import com.ddd.dddstart.common.model.Money;
+import com.ddd.dddstart.domain.ShippingInfo;
+
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Order {
 
     private List<OrderLine> orderLineList;
@@ -19,7 +24,6 @@ public class Order {
 
     public Order(List<OrderLine> orderLineList, ShippingInfo shippingInfo)
     {
-
         setShippingInfo(shippingInfo);
         setOrderLines(orderLineList);
     }

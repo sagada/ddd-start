@@ -1,5 +1,7 @@
-package com.ddd.dddstart.domain;
+package com.ddd.dddstart.order.domain;
 
+import com.ddd.dddstart.common.model.Money;
+import com.ddd.dddstart.domain.Product;
 import lombok.Getter;
 
 @Getter

@@ -1,8 +1,10 @@
-package com.ddd.dddstart.domain;
+package com.ddd.dddstart.common.model;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class Money {
     private int value;
 
@@ -18,5 +20,4 @@ public class Money {
     {
         return new Money(value * multiplier);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.ddd.dddstart.domain;
+package com.ddd.dddstart.order.domain;
 
 public enum OrderState {
     PAYMENT_WAITING, // 결제 대기
