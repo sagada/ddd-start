@@ -2,30 +2,41 @@ package com.ddd.dddstart.order.domain;
 
 import com.ddd.dddstart.common.model.Money;
 import com.ddd.dddstart.domain.ShippingInfo;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
-
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
-    private List<OrderLine> orderLineList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
+    private Long id;
+
+    @Embedded
+    private OrderLines orderLines;
+    @Embedded
     private Money totalAmounts;
+
+    @Embedded
     private ShippingInfo shippingInfo;
     private OrderState orderState;
 
-    public Order(List<OrderLine> orderLineList, Money totalAmounts, ShippingInfo shippingInfo, OrderState orderState)
+    public Order(OrderLines orderLines, Money totalAmounts, ShippingInfo shippingInfo, OrderState orderState)
     {
-        this.orderLineList = orderLineList;
+        this.orderLines = orderLines;
         this.totalAmounts = totalAmounts;
         this.shippingInfo = shippingInfo;
         this.orderState = orderState;
     }
 
-    public Order(List<OrderLine> orderLineList, ShippingInfo shippingInfo)
+    public void changeOrderLines(List<OrderLine> newLines)
     {
-        setShippingInfo(shippingInfo);
-        setOrderLines(orderLineList);
+        orderLines.changeOrderLines(newLines);
+        this.totalAmounts = orderLines.getTotalAmounts();
     }
 
     private void setShippingInfo(ShippingInfo shippingInfo)
@@ -50,13 +61,13 @@ public class Order {
             throw new IllegalArgumentException("Already shipped");
         }
     }
-
-    private void setOrderLines(List<OrderLine> orderLineList)
-    {
-        verifyLeastOneOrMoeOrderLines(orderLineList);
-        this.orderLineList = orderLineList;
-        calculateTotalAmounts();
-    }
+//
+//    private void setOrderLines(List<OrderLine> orderLineList)
+//    {
+//        verifyLeastOneOrMoeOrderLines(orderLineList);
+//        this.orderLines = orderLineList;
+//        calculateTotalAmounts();
+//    }
 
     private void verifyLeastOneOrMoeOrderLines(List<OrderLine> orderLineList)
     {
@@ -64,10 +75,14 @@ public class Order {
             throw new IllegalArgumentException("no OrderLine");
     }
 
-    private void calculateTotalAmounts()
-    {
-        this.totalAmounts = new Money(orderLineList.stream().mapToInt(x -> x.getAmounts().getValue()).sum());
-    }
+//    private void calculateTotalAmounts()
+//    {
+//        int sum = orderLines.stream()
+//                .mapToInt(ol -> ol.getAmounts() * ol.getPrice())
+//                .sum();
+//
+//        this.totalAmounts = new Money(sum);
+//    }
 
     public void changeShipped(){}
 

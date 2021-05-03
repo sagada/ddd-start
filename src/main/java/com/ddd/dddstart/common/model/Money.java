@@ -3,8 +3,11 @@ package com.ddd.dddstart.common.model;
 import lombok.Getter;
 import lombok.ToString;
 
+import javax.persistence.Embeddable;
+
 @Getter
 @ToString
+@Embeddable
 public class Money {
     private int value;
 
