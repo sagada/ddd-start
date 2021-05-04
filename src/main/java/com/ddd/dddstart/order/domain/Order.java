@@ -18,6 +18,7 @@ public class Order {
 
     @Embedded
     private OrderLines orderLines;
+
     @Embedded
     private Money totalAmounts;
 
