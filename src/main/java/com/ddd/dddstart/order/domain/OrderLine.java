@@ -1,6 +1,6 @@
 package com.ddd.dddstart.order.domain;
 
-import com.ddd.dddstart.product.ProductId;
+import com.ddd.dddstart.product.domain.ProductId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

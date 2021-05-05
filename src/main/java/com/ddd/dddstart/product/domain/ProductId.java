@@ -1,4 +1,4 @@
-package com.ddd.dddstart.product;
+package com.ddd.dddstart.product.domain;
 
 
 import lombok.AccessLevel;

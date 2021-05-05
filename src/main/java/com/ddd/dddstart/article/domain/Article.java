@@ -25,11 +25,11 @@ public class Article {
             @AttributeOverride(name = "content", column = @Column(table = "article_content")),
             @AttributeOverride(name = "contentType", column = @Column(table = "article_content"))
     })
-    private ArticleContent content;
+    private ArticleContent articleContent;
 
-    public Article(String title, ArticleContent content) {
+    public Article(String title, ArticleContent articleContent) {
         this.title = title;
-        this.content = content;
+        this.articleContent = articleContent;
     }
 
     public Long getId() {
@@ -40,7 +40,7 @@ public class Article {
         return title;
     }
 
-    public ArticleContent getContent() {
-        return content;
+    public ArticleContent getArticleContent() {
+        return articleContent;
     }
 }

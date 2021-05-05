@@ -22,5 +22,4 @@ public class ArticleContent {
         this.content = content;
         this.contentType = contentType;
     }
-
 }
