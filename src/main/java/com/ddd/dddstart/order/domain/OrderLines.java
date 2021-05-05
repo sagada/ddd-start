@@ -9,11 +9,6 @@ import java.util.List;
 public class OrderLines {
     private List<OrderLine> lines;
 
-    public Money getTotalAmounts()
-    {
-        return new Money(lines.stream().mapToInt(s->s.getPrice() * s.getAmounts()).sum());
-    }
-
     public void changeOrderLines(List<OrderLine> newLines)
     {
         this.lines = newLines;

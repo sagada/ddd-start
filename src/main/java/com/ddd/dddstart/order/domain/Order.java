@@ -1,11 +1,15 @@
 package com.ddd.dddstart.order.domain;
 
 import com.ddd.dddstart.common.model.Money;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
 @Table(name ="purchase_order")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -14,27 +18,29 @@ public class Order {
     private Long id;
 
     @Embedded
-    private OrderLines orderLines;
-
-    @Embedded
-    private Money totalAmounts;
+    private Orderer orderer;
 
     @Embedded
     private ShippingInfo shippingInfo;
+
+    @ElementCollection
+    @CollectionTable(name = "order_line", joinColumns = @JoinColumn(name = "order_number"))
+    @OrderColumn(name = "line_idx")
+    private List<OrderLine> orderLines;
+
+    @Embedded
+    @AttributeOverrides(
+            @AttributeOverride(name = "value", column = @Column(name = "total_amounts"))
+    )
+    private Money totalAmounts;
+
     private OrderState orderState;
 
     public Order(OrderLines orderLines, Money totalAmounts, ShippingInfo shippingInfo, OrderState orderState)
     {
-        this.orderLines = orderLines;
         this.totalAmounts = totalAmounts;
         this.shippingInfo = shippingInfo;
         this.orderState = orderState;
-    }
-
-    public void changeOrderLines(List<OrderLine> newLines)
-    {
-        orderLines.changeOrderLines(newLines);
-        this.totalAmounts = orderLines.getTotalAmounts();
     }
 
     private void setShippingInfo(ShippingInfo shippingInfo)
@@ -67,11 +73,7 @@ public class Order {
 //        calculateTotalAmounts();
 //    }
 
-    private void verifyLeastOneOrMoeOrderLines(List<OrderLine> orderLineList)
-    {
-        if (orderLineList == null || orderLineList.isEmpty())
-            throw new IllegalArgumentException("no OrderLine");
-    }
+
 
 //    private void calculateTotalAmounts()
 //    {

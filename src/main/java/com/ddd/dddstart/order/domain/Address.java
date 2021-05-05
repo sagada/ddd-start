@@ -1,4 +1,4 @@
-package com.ddd.dddstart.common.model;
+package com.ddd.dddstart.order.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

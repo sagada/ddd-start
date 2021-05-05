@@ -1,4 +1,4 @@
-package com.ddd.dddstart.order.domain;
+package com.ddd.dddstart.member.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

@@ -1,7 +1,5 @@
 package com.ddd.dddstart.order.domain;
 
-import com.ddd.dddstart.common.model.Address;
-import com.ddd.dddstart.domain.Receiver;
 import lombok.Getter;
 
 import javax.persistence.*;

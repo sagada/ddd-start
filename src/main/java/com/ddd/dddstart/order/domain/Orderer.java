@@ -1,6 +1,6 @@
 package com.ddd.dddstart.order.domain;
 
-import com.ddd.dddstart.common.model.Address;
+import com.ddd.dddstart.member.domain.MemberId;
 
 import javax.persistence.*;
 

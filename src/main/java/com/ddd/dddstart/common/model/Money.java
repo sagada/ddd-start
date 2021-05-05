@@ -1,6 +1,8 @@
 package com.ddd.dddstart.common.model;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Embeddable;
@@ -8,7 +10,9 @@ import javax.persistence.Embeddable;
 @Getter
 @ToString
 @Embeddable
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money {
+
     private int value;
 
     public Money(int value) {
@@ -23,4 +27,6 @@ public class Money {
     {
         return new Money(value * multiplier);
     }
+
+
 }
