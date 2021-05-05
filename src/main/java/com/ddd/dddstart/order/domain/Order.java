@@ -1,14 +1,11 @@
 package com.ddd.dddstart.order.domain;
 
 import com.ddd.dddstart.common.model.Money;
-import com.ddd.dddstart.domain.ShippingInfo;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name ="purchase_order")
 public class Order {
 
     @Id
