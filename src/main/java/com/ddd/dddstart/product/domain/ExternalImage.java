@@ -6,6 +6,14 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("EI")
 public class ExternalImage extends Image{
+
+    public ExternalImage() {
+    }
+
+    public ExternalImage(String path) {
+        super(path);
+    }
+
     @Override
     public String getURL() {
         return null;

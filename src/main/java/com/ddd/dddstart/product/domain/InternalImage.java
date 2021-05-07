@@ -7,6 +7,13 @@ import javax.persistence.Entity;
 @DiscriminatorValue("II")
 public class InternalImage extends Image{
 
+    public InternalImage() {
+    }
+
+    public InternalImage(String path) {
+        super(path);
+    }
+
     @Override
     public String getURL() {
         return null;

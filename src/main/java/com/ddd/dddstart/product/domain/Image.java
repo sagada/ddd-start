@@ -19,7 +19,7 @@ public abstract class Image {
     @Column(name = "image_path")
     private String path;
 
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(name = "upload_time")
     private LocalDateTime uploadTime;
 
